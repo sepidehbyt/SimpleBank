@@ -23,5 +23,3 @@ COPY . /usr/src/app/
 
 # run entrypoint.sh
 ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
-
-RUN python3 manage.py loaddata initial_data.json

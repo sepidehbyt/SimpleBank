@@ -18,6 +18,7 @@ then
     echo "Apply database migrations"
     python manage.py makemigrations
     python manage.py migrate
+    python3 manage.py loaddata initial_data.json
 
 fi
 
