@@ -13,7 +13,7 @@ from .enums import TransactionType, RepaymentType
 
 class UserManager(BaseUserManager):
 
-    def create_user(self, mobile, password=None):
+    def create_user(self, mobile, password):
         if mobile is None:
             raise TypeError('Users must enter mobile.')
 
@@ -61,12 +61,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     def _generate_jwt_token(self):
         dt = datetime.now() + timedelta(days=60)
 
-        token = jwt.encode({
+        return jwt.encode({
             'mobile': self.mobile,
             'exp': int(dt.strftime('%s'))
         }, settings.SECRET_KEY, algorithm='HS256')
-
-        return token.decode('utf-8')
 
 
 class Bank(models.Model):

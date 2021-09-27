@@ -1,0 +1,40 @@
+[
+    {
+        "model": "bonus.user",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$260000$dmBerNl5fNAZCQFOfvnwOE$FehtjziIZ2t+LvZetyyj3t+GiG/I3UT5z6S+Lxz6FZE=",
+            "last_login": null,
+            "is_superuser": true,
+            "first_name": "admin",
+            "last_name": "admin",
+            "mobile": "+989121111111",
+            "is_staff": true,
+            "created_at": "2021-09-27T09:14:01.432Z",
+            "updated_at": "2021-09-27T10:09:29.049Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "bonus.bank",
+        "pk": 1,
+        "fields": {
+            "name": "Bonus",
+            "owner": 1,
+            "created_at": "2021-09-27T10:25:23Z",
+            "updated_at": "2021-09-27T10:25:23Z"
+        }
+    },
+    {
+        "model": "bonus.branch",
+        "pk": 1,
+        "fields": {
+            "name": "Bonus Branch #1",
+            "bank": 1,
+            "manager": 1,
+            "created_at": "2021-09-27T10:25:59Z",
+            "updated_at": "2021-09-27T10:25:59Z"
+        }
+    }
+]

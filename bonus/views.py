@@ -34,6 +34,7 @@ class BasicPagination(PageNumberPagination):
 class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = UserSerializer
+    renderer_classes = [BonusResponseRenderer, ]
 
     def retrieve(self, request, *args, **kwargs):
         serializer = self.serializer_class(request.user)
@@ -44,12 +45,16 @@ class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     def update(self, request, *args, **kwargs):
         serializer_data = request.data
         serializer = self.serializer_class(request.user, data=serializer_data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        data = serializer.data
-        data.pop('id', None)
+        response = {}
 
-        return Response(data, status=status.HTTP_200_OK)
+        if serializer.is_valid():
+            serializer.save()
+            data = serializer.data
+            data.pop('id', None)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            response['detail'] = serializer.errors
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
 
 class TokenGenerator(PasswordResetTokenGenerator):

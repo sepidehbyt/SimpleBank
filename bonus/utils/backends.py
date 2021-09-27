@@ -4,7 +4,7 @@ from django.conf import settings
 
 from rest_framework import authentication, exceptions
 
-from .models import User
+from bonus.models import User
 
 
 class JWTAuthentication(authentication.BaseAuthentication):
@@ -76,19 +76,16 @@ class JWTAuthentication(authentication.BaseAuthentication):
         successful, return the user and token. If not, throw an error.
         """
         try:
-            payload = jwt.decode(token, settings.SECRET_KEY)
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
+
         except:
-            msg = 'اهراز هویت نامعتبر است. توکن فرستاده شده نامعتبر است.'
+            msg = 'Invalid authentication. The token sent is invalid.'
             raise exceptions.AuthenticationFailed(msg)
 
         try:
-            user = User.objects.get(email=payload['email'])
+            user = User.objects.get(mobile=payload['mobile'])
         except User.DoesNotExist:
-            msg = 'کاربری با توکن فرستاده شده یافت نشد.'
-            raise exceptions.AuthenticationFailed(msg)
-
-        if not user.is_active:
-            msg = 'کاربر مود نظر غیرفعال شده است.'
+            msg = 'No user found with the token sent.'
             raise exceptions.AuthenticationFailed(msg)
 
         return user, token

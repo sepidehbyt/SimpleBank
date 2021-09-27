@@ -8,6 +8,9 @@ from bonus.utils import exceptions
 
 
 class UserSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(max_length=32, min_length=2)
+    last_name = serializers.CharField(max_length=32, min_length=2)
+
     class Meta:
         model = User
         fields = ('id', 'mobile', 'first_name', 'last_name')
@@ -35,11 +38,13 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         mobile = data.get('mobile', None)
+        password = data.get('password', None)
 
         if not User.objects.filter(mobile=User.objects.normalize_mobile(mobile)):
-            return {'mobile': mobile}
+            return {'mobile': mobile, 'password': password}
         raise exceptions.EntityAlreadyExists()
 
+    # an more complex validation on mobile
     def validate_mobile(self, value):
         if str(value[0]) != '9':
             raise serializers.ValidationError("Mobile field is not valid.")
@@ -63,7 +68,7 @@ class LoginSerializer(serializers.Serializer):
         mobile = data.get('mobile', None)
         password = data.get('password', None)
 
-        user = authenticate(username=mobile, password=password)
+        user = authenticate(username=User.objects.normalize_mobile(mobile), password=password)
 
         if user is None:
             raise serializers.ValidationError("Mobile or Password is not correct.")
