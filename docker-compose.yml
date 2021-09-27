@@ -1,0 +1,47 @@
+version: '3.7'
+
+services:
+  web:
+    build: ./
+    command: gunicorn SimpleBank.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./:/usr/src/app/
+    ports:
+      - 8000:8000
+    env_file:
+      - .env
+    depends_on:
+      - db
+    networks:
+      - bonus-server
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: SQL_DATABASE
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: SQL_USER
+      # You can use whatever password you like
+      MYSQL_PASSWORD: SQL_PASSWORD
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: SQL_PASSWORD
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3306:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+      # Where our data will be persisted
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      - bonus-server
+
+# Names our volume
+volumes:
+  my-db:
+
+networks:
+  bonus-server:
+    external: true
