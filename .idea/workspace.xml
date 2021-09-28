@@ -2,22 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7994e11-2ed6-41bf-ab1a-5d6a87eb60a4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/SimpleBank/celery.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bonus/scheduledTasks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bonus/utils/customPermissions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bonus/celeryTasks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bonus/utils/smsService.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimpleBank/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimpleBank/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/enums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/scheduledTasks.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bonus/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bonus/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bonus/utils/bonusRenderer.py" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/utils/bonusRenderer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bonus/utils/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/utils/exceptions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bonus/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/initial_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/initial_data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,8 +154,23 @@
       <option name="presentableId" value="Default" />
       <updated>1632649873200</updated>
       <workItem from="1632649887067" duration="39916000" />
-      <workItem from="1632743656832" duration="46635000" />
+      <workItem from="1632743656832" duration="52531000" />
     </task>
+    <task id="LOCAL-00001" summary="DM completed, celery added.">
+      <created>1632860235541</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1632860235541</updated>
+    </task>
+    <task id="LOCAL-00002" summary="only rename a function">
+      <created>1632860293641</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1632860293641</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +189,11 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="DM completed, celery added." />
+    <MESSAGE value="only rename a function" />
+    <option name="LAST_COMMIT_MESSAGE" value="only rename a function" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="412" y="202" width="588" height="390" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1632651351519">
       <screen x="67" y="27" width="1299" height="741" />
@@ -189,62 +203,62 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="390" y="114" width="642" height="564" key="#docker-compose.yml.bonus:_Compose_Deployment/67.27.1299.741@67.27.1299.741" timestamp="1632681698629" />
-    <state x="279" y="27" width="865" height="741" key="CommitChangelistDialog2" timestamp="1632860235148">
+    <state x="279" y="27" width="865" height="741" key="CommitChangelistDialog2" timestamp="1632860293530">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="279" y="27" width="865" height="741" key="CommitChangelistDialog2/67.27.1299.741@67.27.1299.741" timestamp="1632860235148" />
+    <state x="279" y="27" width="865" height="741" key="CommitChangelistDialog2/67.27.1299.741@67.27.1299.741" timestamp="1632860293530" />
     <state width="1297" height="542" key="DebuggerActiveHint" timestamp="1632689159667">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state width="1297" height="542" key="DebuggerActiveHint/67.27.1299.741@67.27.1299.741" timestamp="1632689159667" />
-    <state x="167" y="125" width="1099" height="543" maximized="true" key="DiffContextDialog" timestamp="1632860217449">
+    <state x="167" y="125" width="1099" height="543" maximized="true" key="DiffContextDialog" timestamp="1632866092971">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="167" y="125" width="1099" height="543" maximized="true" key="DiffContextDialog/67.27.1299.741@67.27.1299.741" timestamp="1632860217449" />
-    <state width="1253" height="278" key="GridCell.Tab.0.bottom" timestamp="1632855258816">
+    <state x="167" y="125" width="1099" height="543" maximized="true" key="DiffContextDialog/67.27.1299.741@67.27.1299.741" timestamp="1632866092971" />
+    <state width="1253" height="305" key="GridCell.Tab.0.bottom" timestamp="1632866060223">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1253" height="278" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1632855258816" />
-    <state width="1253" height="278" key="GridCell.Tab.0.center" timestamp="1632855258815">
+    <state width="1253" height="305" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1632866060223" />
+    <state width="1253" height="305" key="GridCell.Tab.0.center" timestamp="1632866060222">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1253" height="278" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1632855258815" />
-    <state width="1253" height="278" key="GridCell.Tab.0.left" timestamp="1632855258814">
+    <state width="1253" height="305" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1632866060222" />
+    <state width="1253" height="305" key="GridCell.Tab.0.left" timestamp="1632866060222">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1253" height="278" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1632855258814" />
-    <state width="1253" height="278" key="GridCell.Tab.0.right" timestamp="1632855258816">
+    <state width="1253" height="305" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1632866060222" />
+    <state width="1253" height="305" key="GridCell.Tab.0.right" timestamp="1632866060223">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1253" height="278" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1632855258816" />
-    <state width="1253" height="278" key="GridCell.Tab.1.bottom" timestamp="1632855258818">
+    <state width="1253" height="305" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1632866060223" />
+    <state width="1253" height="305" key="GridCell.Tab.1.bottom" timestamp="1632866060224">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1253" height="278" key="GridCell.Tab.1.bottom/67.27.1299.741@67.27.1299.741" timestamp="1632855258818" />
-    <state width="1253" height="278" key="GridCell.Tab.1.center" timestamp="1632855258817">
+    <state width="1253" height="305" key="GridCell.Tab.1.bottom/67.27.1299.741@67.27.1299.741" timestamp="1632866060224" />
+    <state width="1253" height="305" key="GridCell.Tab.1.center" timestamp="1632866060224">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1253" height="278" key="GridCell.Tab.1.center/67.27.1299.741@67.27.1299.741" timestamp="1632855258817" />
-    <state width="1253" height="278" key="GridCell.Tab.1.left" timestamp="1632855258817">
+    <state width="1253" height="305" key="GridCell.Tab.1.center/67.27.1299.741@67.27.1299.741" timestamp="1632866060224" />
+    <state width="1253" height="305" key="GridCell.Tab.1.left" timestamp="1632866060224">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1253" height="278" key="GridCell.Tab.1.left/67.27.1299.741@67.27.1299.741" timestamp="1632855258817" />
-    <state width="1253" height="278" key="GridCell.Tab.1.right" timestamp="1632855258817">
+    <state width="1253" height="305" key="GridCell.Tab.1.left/67.27.1299.741@67.27.1299.741" timestamp="1632866060224" />
+    <state width="1253" height="305" key="GridCell.Tab.1.right" timestamp="1632866060224">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1253" height="278" key="GridCell.Tab.1.right/67.27.1299.741@67.27.1299.741" timestamp="1632855258817" />
+    <state width="1253" height="305" key="GridCell.Tab.1.right/67.27.1299.741@67.27.1299.741" timestamp="1632866060224" />
     <state x="205" y="31" key="SettingsEditor" timestamp="1632743483012">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="205" y="31" key="SettingsEditor/67.27.1299.741@67.27.1299.741" timestamp="1632743483012" />
-    <state x="311" y="121" width="800" height="551" key="Vcs.Push.Dialog.v2" timestamp="1632860237444">
+    <state x="311" y="121" width="800" height="551" key="Vcs.Push.Dialog.v2" timestamp="1632860295148">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="311" y="121" width="800" height="551" key="Vcs.Push.Dialog.v2/67.27.1299.741@67.27.1299.741" timestamp="1632860237444" />
-    <state width="649" height="371" key="XDebugger.FullValuePopup" timestamp="1632850742478">
+    <state x="311" y="121" width="800" height="551" key="Vcs.Push.Dialog.v2/67.27.1299.741@67.27.1299.741" timestamp="1632860295148" />
+    <state width="649" height="371" key="XDebugger.FullValuePopup" timestamp="1632865157084">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="649" height="371" key="XDebugger.FullValuePopup/67.27.1299.741@67.27.1299.741" timestamp="1632850742478" />
+    <state width="649" height="371" key="XDebugger.FullValuePopup/67.27.1299.741@67.27.1299.741" timestamp="1632865157084" />
     <state x="167" y="125" width="1099" height="543" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1632837499737">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
@@ -257,24 +271,17 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="251" y="84" width="920" height="624" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/67.27.1299.741@67.27.1299.741" timestamp="1632841913003" />
-    <state x="364" y="107" width="785" height="578" key="find.popup" timestamp="1632853570042">
+    <state x="364" y="107" width="785" height="578" key="find.popup" timestamp="1632863747325">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="364" y="107" width="785" height="578" key="find.popup/67.27.1299.741@67.27.1299.741" timestamp="1632853570042" />
-    <state x="379" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1632850266095">
+    <state x="364" y="107" width="785" height="578" key="find.popup/67.27.1299.741@67.27.1299.741" timestamp="1632863747325" />
+    <state x="379" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1632865509056">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="379" y="89" width="672" height="678" key="search.everywhere.popup/67.27.1299.741@67.27.1299.741" timestamp="1632850266095" />
+    <state x="379" y="89" width="672" height="678" key="search.everywhere.popup/67.27.1299.741@67.27.1299.741" timestamp="1632865509056" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/bonus/views.py</url>
-          <line>222</line>
-          <option name="timeStamp" value="119" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -286,6 +293,12 @@
     <watches-manager>
       <configuration name="Python.DjangoServer">
         <watch expression="Transaction.objects.filter(dest_account__owner=request.user)" language="Python" />
+        <watch expression="list(serializer.data).first_name" language="Python" />
+        <watch expression="request.user.first_name" language="Python" />
+        <watch expression="serializer.data" language="Python" />
+        <watch expression="model.type" language="Python" />
+        <watch expression="serializer" />
+        <watch expression="serializer.data" language="Python" />
       </configuration>
     </watches-manager>
   </component>

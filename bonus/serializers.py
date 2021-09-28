@@ -2,7 +2,6 @@ from abc import ABC
 
 from rest_framework import serializers
 from django.core.exceptions import PermissionDenied
-from django.http import Http404
 from .models import User, Branch, Account, Bank, Transaction
 from django.contrib.auth import authenticate
 from bonus.utils import exceptions
@@ -147,6 +146,19 @@ class AccountMinimalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = ['number', 'owner']
+
+
+class AccountCloseSerializer(serializers.ModelSerializer):
+    src_branch_id = PrimaryKeyRelatedField(queryset=Branch.objects.all(), required=True)
+
+    class Meta:
+        model = Account
+        fields = ['id', 'src_branch_id']
+
+    def update(self, instance, validated_data):
+        instance.is_active = False
+        instance.save()
+        return instance
 
 
 class AccountCreateSerializer(serializers.ModelSerializer):

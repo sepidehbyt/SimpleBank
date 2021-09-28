@@ -80,7 +80,7 @@ DATABASES = {
         "NAME": os.environ.get("SQL_DATABASE", "db"),
         "USER": os.environ.get("SQL_USER", "root"),
         "PASSWORD": os.environ.get("SQL_PASSWORD", "1qaz!QAZ"),
-        "HOST": os.environ.get("SQL_HOST", "172.18.0.2"),
+        "HOST": os.environ.get("SQL_HOST", "172.18.0.3"),
         "PORT": os.environ.get("SQL_PORT", "3306"),
     }
 }
@@ -138,7 +138,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Celery
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'django-cache'
-CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", 'amqp://user:password@172.18.0.3:5672'),
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", 'amqp://user:password@172.18.0.2'),
 
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'

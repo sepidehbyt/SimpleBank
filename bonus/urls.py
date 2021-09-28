@@ -2,7 +2,7 @@ from django.urls import path, include, re_path
 from django.conf.urls import url
 from .views import (
     LoginAPIView, RegistrationAPIView, UserRetrieveUpdateAPIView, StaffViewSet, BranchViewSet, AccountViewSet,
-    TransactionViewSet
+    TransactionViewSet, AccountCloseApiView
 )
 from rest_framework import routers
 
@@ -18,5 +18,6 @@ urlpatterns = [
     path('user', UserRetrieveUpdateAPIView.as_view()),
     path('register', RegistrationAPIView.as_view()),
     path('login', LoginAPIView.as_view()),
+    path('account/close', AccountCloseApiView.as_view()),
     re_path('^', include(router.urls)),
 ]

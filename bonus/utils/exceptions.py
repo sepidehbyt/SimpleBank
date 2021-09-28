@@ -15,3 +15,8 @@ class AccountLimitExceeded(APIException):
 class MinBalanceLimit(APIException):
     status_code = 403
     default_detail = 'Minimum balance is ' + str(settings.MIN_ACCOUNT_BALANCE)
+
+
+class BranchCloseMismatch(APIException):
+    status_code = 400
+    default_detail = 'User cannot close his account in this branch.'

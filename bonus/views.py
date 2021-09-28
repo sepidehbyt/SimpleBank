@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.conf import settings
+from bonus.utils import exceptions
 from django.core.exceptions import PermissionDenied, SuspiciousOperation
 from django.shortcuts import get_object_or_404
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -8,7 +9,7 @@ from rest_framework.generics import RetrieveUpdateAPIView, ListCreateAPIView, Cr
 from .models import User, Branch, Bank, Account, Transaction, Loan
 from .serializers import LoginSerializer, RegistrationSerializer, UserSerializer, BranchCreateSerializer,\
     BranchSerializer, AccountSerializer, AccountMinimalSerializer, AccountCreateSerializer, TransactionCreateSerializer,\
-    TransactionSerializer
+    TransactionSerializer, AccountCloseSerializer
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
@@ -28,7 +29,7 @@ from django.db.models import Q
 from django.core.mail import EmailMultiAlternatives
 import datetime
 import os
-from .scheduledTasks import c_get_tweets
+from bonus.utils.smsService import manage_sms
 
 
 class BasicPagination(PageNumberPagination):
@@ -115,10 +116,32 @@ class AccountViewSet(viewsets.ViewSet):
         serializer = self.serializer_class(data=request.data, context={'owner': request.user})
         if serializer.is_valid():
             serializer.save()
-            return Response(self.response_serializer_class(Account.objects.get(pk=serializer.data.get('id'))).data,
+            account = Account.objects.get(pk=serializer.data.get('id'))
+            manage_sms(request.user, account, 'account')
+            return Response(self.response_serializer_class(account).data,
                             status=status.HTTP_201_CREATED)
         else:
             response = {'detail': serializer.errors}
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+
+class AccountCloseApiView(APIView):
+    permission_classes = (IsRegularUser,)
+    serializer_class = AccountCloseSerializer
+    renderer_classes = [BonusResponseRenderer, ]
+
+    def delete(self, request):
+        queryset = Account.objects.filter(owner=request.user, is_active=True)
+        account = get_object_or_404(queryset)
+        serializer = self.serializer_class(account, data=request.data, partial=True)
+        src_branch_id = request.data.get('src_branch_id')
+        if src_branch_id == account.src_branch_id:
+            raise exceptions.BranchCloseMismatch()
+        if serializer.is_valid():
+            serializer.save()
+            return Response(None, status=status.HTTP_200_OK)
+        else:
+            esponse['detail'] = serializer.errors
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -133,8 +156,7 @@ class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
         return Response(data, status=status.HTTP_200_OK)
 
     def update(self, request, *args, **kwargs):
-        serializer_data = request.data
-        serializer = self.serializer_class(request.user, data=serializer_data, partial=True)
+        serializer = self.serializer_class(request.user, data=request.data, partial=True)
         response = {}
 
         if serializer.is_valid():
@@ -164,6 +186,7 @@ class RegistrationAPIView(APIView):
         serializer = self.serializer_class(data=user)
         if serializer.is_valid():
             serializer.save()
+            manage_sms(User.objects.get(pk=serializer.data['id']), None, 'welcome')
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             response['detail'] = serializer.errors
@@ -217,7 +240,9 @@ class TransactionViewSet(viewsets.ViewSet):
                                                                        'owner': request.user})
         if serializer.is_valid():
             serializer.save()
-            return Response(self.response_serializer_class(Transaction.objects.get(pk=serializer.data.get('id'))).data,
+            transaction = Transaction.objects.get(pk=serializer.data.get('id'))
+            manage_sms(request.user, transaction, 'transaction')
+            return Response(self.response_serializer_class(transaction).data,
                             status=status.HTTP_201_CREATED)
         else:
             response = {'detail': serializer.errors}
