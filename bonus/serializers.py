@@ -141,7 +141,7 @@ class AccountSerializer(serializers.ModelSerializer):
         fields = ['id', 'number', 'src_branch', 'owner', 'credit']
 
 
-class AccountShowSerializer(serializers.ModelSerializer):
+class AccountMinimalSerializer(serializers.ModelSerializer):
     owner = UserSerializer()
 
     class Meta:
@@ -183,8 +183,8 @@ class AccountCreateSerializer(serializers.ModelSerializer):
 
 
 class TransactionSerializer(serializers.ModelSerializer):
-    src_account = AccountShowSerializer()
-    dest_account = AccountShowSerializer()
+    src_account = AccountMinimalSerializer()
+    dest_account = AccountMinimalSerializer()
     owner = UserSerializer()
 
     class Meta:

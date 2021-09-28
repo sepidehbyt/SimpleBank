@@ -7,7 +7,7 @@ from django.utils.encoding import force_bytes, force_text
 from rest_framework.generics import RetrieveUpdateAPIView, ListCreateAPIView, CreateAPIView, UpdateAPIView
 from .models import User, Branch, Bank, Account, Transaction, Loan
 from .serializers import LoginSerializer, RegistrationSerializer, UserSerializer, BranchCreateSerializer,\
-    BranchSerializer, AccountSerializer, AccountShowSerializer, AccountCreateSerializer, TransactionCreateSerializer,\
+    BranchSerializer, AccountSerializer, AccountMinimalSerializer, AccountCreateSerializer, TransactionCreateSerializer,\
     TransactionSerializer
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
