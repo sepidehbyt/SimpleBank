@@ -12,6 +12,7 @@ services:
       - .env
     depends_on:
       - db
+      - worker
     networks:
       - bonus-server
 
@@ -35,6 +36,28 @@ services:
       # Where our data will be persisted
     volumes:
       - my-db:/var/lib/mysql
+    networks:
+      - bonus-server
+
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - bonus-server
+
+  worker:
+    build: ./
+    restart: "no"
+    env_file: .env
+    command: ["celery", "--app=SimpleBank", "worker", "--concurrency=1", "--hostname=worker@%h", "--loglevel=INFO"]
+    depends_on:
+      - rabbit
     networks:
       - bonus-server
 

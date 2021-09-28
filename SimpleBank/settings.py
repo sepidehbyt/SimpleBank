@@ -16,7 +16,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -37,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bonus.apps.BonusConfig',
+    'django_celery_results',
     'drf_yasg',
 ]
 
@@ -71,21 +71,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SimpleBank.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.mysql"),
-        "NAME": os.environ.get("SQL_DATABASE", "bonus"),
+        "NAME": os.environ.get("SQL_DATABASE", "db"),
         "USER": os.environ.get("SQL_USER", "root"),
         "PASSWORD": os.environ.get("SQL_PASSWORD", "1qaz!QAZ"),
         "HOST": os.environ.get("SQL_HOST", "172.18.0.2"),
         "PORT": os.environ.get("SQL_PORT", "3306"),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -113,7 +111,6 @@ REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'bonus.utils.exceptionHandler.custom_exception_handler'
 }
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -127,7 +124,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -138,3 +134,19 @@ STATIC_ROOT = 'static'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Celery
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", 'amqp://user:password@172.18.0.3:5672'),
+
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Europe/London'
+
+# APP SETTING
+MIN_ACCOUNT_BALANCE = 10000
+MIN_TRANSACTION_AMOUNT = 1000
+MAX_TRANSACTION_AMOUNT = 1000000
+MAX_TRANSACTION_AMOUNT_DAILY = 3000000

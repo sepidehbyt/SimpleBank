@@ -8,7 +8,7 @@ from django.contrib.auth.models import (
 )
 
 from django.db import models
-from .enums import TransactionType, RepaymentType
+from .enums import TransactionType, RepaymentType, RoleType
 
 
 class UserManager(BaseUserManager):
@@ -19,17 +19,18 @@ class UserManager(BaseUserManager):
 
         user = self.model(mobile=self.normalize_mobile(mobile))
         user.set_password(password)
+        user.role = RoleType.USER.value
         user.save()
 
         return user
 
-    def create_superuser(self, email, password):
+    def create_superuser(self, mobile, password, is_staff):
         if password is None:
             raise TypeError('Staff must have password.')
 
-        user = self.create_user(email, password)
-        user.is_superuser = True
-        user.is_staff = True
+        user = self.create_user(mobile, password)
+        user.is_staff = is_staff
+        user.role = RoleType.BRANCH_MANAGER.value
         user.save()
 
         return user
@@ -43,6 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=32, unique=False, default='', blank=True)
     last_name = models.CharField(max_length=32, unique=False, default='', blank=True)
     mobile = models.CharField(max_length=13, unique=True, null=False)
+    role = models.CharField(max_length=16, choices=[(r, r.value) for r in RoleType], default='USER')
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
@@ -80,7 +82,7 @@ class Bank(models.Model):
 class Branch(models.Model):
     name = models.CharField(max_length=32, unique=True, default='Bonus Branch #1', blank=False)
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE, blank=False)
-    manager = models.ForeignKey(User, on_delete=models.PROTECT, blank=True)
+    manager = models.OneToOneField(User, on_delete=models.PROTECT, blank=False)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
@@ -89,6 +91,7 @@ class Branch(models.Model):
 
 
 class Account(models.Model):
+    number = models.CharField(max_length=16, default='1111111111111111', unique=True, blank=False)
     owner = models.ForeignKey(User, on_delete=models.PROTECT)
     src_branch = models.ForeignKey(Branch, on_delete=models.PROTECT)
     credit = models.IntegerField(default=0)
@@ -101,10 +104,11 @@ class Account(models.Model):
 
 
 class Transaction(models.Model):
-    src_account = models.ForeignKey(Account, related_name="src_accounts", on_delete=models.PROTECT)
+    owner = models.ForeignKey(User, on_delete=models.PROTECT, default=1)
+    src_account = models.ForeignKey(Account, related_name="src_accounts", on_delete=models.PROTECT, null=True)
     dest_account = models.ForeignKey(Account, related_name="dest_accounts", on_delete=models.PROTECT)
     amount = models.IntegerField(default=0)
-    type = models.CharField(max_length=8, choices=[(t, t.value) for t in TransactionType])
+    type = models.CharField(max_length=16, choices=[(t, t.value) for t in TransactionType])
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
