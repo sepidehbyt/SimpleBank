@@ -6,20 +6,21 @@ from django.shortcuts import get_object_or_404
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text
 from rest_framework.generics import RetrieveUpdateAPIView, ListCreateAPIView, CreateAPIView, UpdateAPIView
-from .models import User, Branch, Bank, Account, Transaction, Loan, Installment
+from .models import User, Branch, Bank, Account, Transaction, Loan, Installment, UserStatistic
 from .serializers import LoginSerializer, RegistrationSerializer, UserSerializer, BranchCreateSerializer,\
     BranchSerializer, AccountSerializer, AccountMinimalSerializer, AccountCreateSerializer, TransactionCreateSerializer,\
-    TransactionSerializer, AccountCloseSerializer, LoanSerializer, LoanCreateSerializer
+    TransactionSerializer, AccountCloseSerializer, LoanSerializer, LoanCreateSerializer, UserStatisticSerializer
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.viewsets import GenericViewSet
 from bonus.utils.bonusRenderer import BonusResponseRenderer
-from bonus.utils.customPermissions import IsRegularUser
+from bonus.utils.customPermissions import IsRegularUser, IsStaff
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from .enums import TransactionType
+from .enums import TransactionType, RoleType
 import math
 import random
 from rest_framework.mixins import CreateModelMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin
@@ -30,10 +31,36 @@ from django.core.mail import EmailMultiAlternatives
 import datetime
 import os
 from bonus.utils.smsService import manage_sms
+from rest_framework.filters import OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend, FilterSet
 
 
 class BasicPagination(PageNumberPagination):
     page_size_query_param = 'limit'
+
+
+class UserStatisticListView(generics.ListAPIView):
+    permission_classes = [IsAdminUser]
+    queryset = UserStatistic.objects.all()
+    serializer_class = UserStatisticSerializer
+    filter_backends = (DjangoFilterBackend, OrderingFilter, )
+    filterset_fields = ['name', 'mobile', 'credit', 'debt', 'account_closed', 'loans_gotten', 'loans_unsettled']
+    ordering_fields = ['credit', 'debt', 'account_closed', 'loans_gotten', 'loans_unsettled']
+
+
+class TransactionListView(generics.ListAPIView):
+    permission_classes = [IsStaff]
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
+    filter_backends = (DjangoFilterBackend, OrderingFilter, )
+    filterset_fields = ['owner__mobile', 'src_account', 'src_account__owner', 'dest_account', 'dest_account__owner',
+                        'amount', 'type']
+    ordering_fields = ['amount', 'type']
+
+    # in case to change
+    def get_queryset(self):
+        staff = self.request.user
+        return Transaction.objects.all()
 
 
 class StaffViewSet(viewsets.ViewSet):
@@ -189,7 +216,10 @@ class RegistrationAPIView(APIView):
         serializer = self.serializer_class(data=user)
         if serializer.is_valid():
             serializer.save()
-            manage_sms(User.objects.get(pk=serializer.data['id']), None, 'welcome')
+            user = User.objects.get(pk=serializer.data['id'])
+            user_statistic = UserStatistic(user=user, mobile=user.mobile, name=user.first_name+' '+user.last_name)
+            user_statistic.save()
+            manage_sms(user, None, 'welcome')
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             response['detail'] = serializer.errors

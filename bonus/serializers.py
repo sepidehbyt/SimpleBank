@@ -2,7 +2,7 @@ from abc import ABC
 
 from rest_framework import serializers
 from django.core.exceptions import PermissionDenied
-from .models import User, Branch, Account, Bank, Transaction, Loan, Installment
+from .models import User, Branch, Account, Bank, Transaction, Loan, Installment, UserStatistic
 from django.contrib.auth import authenticate
 from bonus.utils import exceptions
 from django.conf import settings
@@ -28,7 +28,17 @@ class UserSerializer(serializers.ModelSerializer):
         for (key, value) in validated_data.items():
             setattr(instance, key, value)
         instance.save()
+        user_statistic = UserStatistic.objects.get(user=instance)
+        user_statistic.name = instance.first_name + ' ' + instance.last_name
+        user_statistic.save()
         return instance
+
+
+class UserStatisticSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserStatistic
+        fields = ['name', 'mobile', 'credit', 'debt', 'account_closed', 'loans_gotten', 'loans_unsettled']
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -156,9 +166,15 @@ class AccountCloseSerializer(serializers.ModelSerializer):
         model = Account
         fields = ['id', 'src_branch_id']
 
+    def update_user_statistic(self, instance):
+        user_statistic = UserStatistic.objects.get(user=instance.owner)
+        user_statistic.account_closed = True
+        user_statistic.save()
+
     def update(self, instance, validated_data):
         instance.is_active = False
         instance.save()
+        self.update_user_statistic(instance)
         return instance
 
 
@@ -237,6 +253,7 @@ class TransactionCreateSerializer(serializers.ModelSerializer):
                 dest_account.credit = dest_account.credit + amount
                 dest_account.save()
                 transaction_type = TransactionType.DEPOSIT_CASH.value
+                update_user_statistic(dest_account, +amount)
             # account to account deposit
             else:
                 self.check_amount(src_account, amount)
@@ -245,11 +262,14 @@ class TransactionCreateSerializer(serializers.ModelSerializer):
                 src_account.credit = src_account.credit - amount
                 src_account.save()
                 transaction_type = TransactionType.DEPOSIT.value
+                update_user_statistic(src_account, +amount)
+                update_user_statistic(dest_account, -amount)
         else:
             # withdraw cash from his own account
             dest_account.credit = dest_account.credit + amount
             dest_account.save()
             transaction_type = TransactionType.WITHDRAW.value
+            update_user_statistic(dest_account, -amount)
 
         return {'src_account': data.get('src_account_id'),
                 'dest_account': data.get('dest_account_id'),
@@ -257,6 +277,11 @@ class TransactionCreateSerializer(serializers.ModelSerializer):
                 'owner': owner,
                 'amount': amount,
                 }
+
+    def update_user_statistic(self, account, amount):
+        user_statistic = UserStatistic.objects.get(user=account.owner)
+        user_statistic.credit = user_statistic.credit + amount
+        user_statistic.save()
 
     def check_amount(self, account, amount):
         if account.credit - amount < int(settings.MIN_ACCOUNT_BALANCE):
@@ -312,7 +337,15 @@ class LoanCreateSerializer(serializers.ModelSerializer):
                                       pay_date=pay_date)
             installment.save()
 
+    def update_user_statistics(self, loan):
+        user_statistic = UserStatistic.objects.get(user=loan.applicant)
+        user_statistic.loans_gotten = user_statistic.loans_gotten + 1
+        user_statistic.loans_unsettled = user_statistic.loans_unsettled + 1
+        user_statistic.debt = user_statistic.debt + loan.amount
+        user_statistic.save()
+
     def create(self, validated_data):
         loan = Loan.objects.create(**validated_data)
         self.create_installments(loan)
+        self.update_user_statistics(loan)
         return loan

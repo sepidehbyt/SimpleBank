@@ -115,7 +115,8 @@ REST_FRAMEWORK = {
         'bonus.utils.backends.JWTAuthentication',
     ),
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
-    'EXCEPTION_HANDLER': 'bonus.utils.exceptionHandler.custom_exception_handler'
+    'EXCEPTION_HANDLER': 'bonus.utils.exceptionHandler.custom_exception_handler',
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 
 # Internationalization

@@ -2,7 +2,7 @@ from django.urls import path, include, re_path
 from django.conf.urls import url
 from .views import (
     LoginAPIView, RegistrationAPIView, UserRetrieveUpdateAPIView, StaffViewSet, BranchViewSet, AccountViewSet,
-    TransactionViewSet, AccountCloseApiView, LoanViewSet
+    TransactionViewSet, AccountCloseApiView, LoanViewSet, UserStatisticListView, TransactionListView
 )
 from rest_framework import routers
 
@@ -17,6 +17,8 @@ urlpatterns = [
     url(r'^transaction/(?P<type>\w+)$', TransactionViewSet.as_view({'post': 'create'})),
     path('transaction', TransactionViewSet.as_view({'get': 'list'})),
     path('user', UserRetrieveUpdateAPIView.as_view()),
+    path('user/statistic', UserStatisticListView.as_view()),
+    path('report/transaction', TransactionListView.as_view()),
     path('register', RegistrationAPIView.as_view()),
     path('login', LoginAPIView.as_view()),
     path('account/close', AccountCloseApiView.as_view()),

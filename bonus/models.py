@@ -70,6 +70,23 @@ class User(AbstractBaseUser, PermissionsMixin):
         }, settings.SECRET_KEY, algorithm='HS256')
 
 
+class UserStatistic(models.Model):
+    name = models.CharField(max_length=64, default='Bonus Bank User', blank=False)
+    mobile = models.CharField(max_length=13, unique=True, null=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    credit = models.IntegerField(default=0)
+    debt = models.IntegerField(default=0)
+    account_closed = models.BooleanField(default=False)
+    loans_gotten = models.IntegerField(default=0)
+    loans_unsettled = models.IntegerField(default=0)
+    # whatever more
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Bank(models.Model):
     name = models.CharField(max_length=32, unique=True, default='Bonus', blank=False)
     owner = models.OneToOneField(User, on_delete=models.PROTECT)
