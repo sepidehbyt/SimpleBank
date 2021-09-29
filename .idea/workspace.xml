@@ -2,16 +2,56 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7994e11-2ed6-41bf-ab1a-5d6a87eb60a4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/identity/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/identity/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/identity/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/identity/enums.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/identity/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/identity/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/identity/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/identity/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/identity/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/enums.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimpleBank/cronTasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/cronTasks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SimpleBank/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/utils/customPermissions.py" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/utils/customPermissions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/utils/smsService.py" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/utils/smsService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bonus/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimpleBank/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/celeryTasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/utils/celeryTasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/enums.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/utils/backends.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/utils/backends.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/utils/bonusRenderer.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/utils/bonusRenderer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/utils/customPermissions.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/utils/customPermissions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/utils/exceptionHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/utils/exceptionHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/utils/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/utils/exceptions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/utils/smsService.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/utils/smsService.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bonus/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/initial_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/initial_data.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +105,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/bonus/utils" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Service" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -76,18 +116,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Service" />
+      <recent name="$PROJECT_DIR$/Manage" />
+      <recent name="$PROJECT_DIR$/Identity" />
       <recent name="$PROJECT_DIR$/bonus/utils" />
       <recent name="$PROJECT_DIR$/bonus" />
-      <recent name="$PROJECT_DIR$/SimpleBank" />
-      <recent name="$PROJECT_DIR$/Bonus" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/SimpleBank" />
+      <recent name="$PROJECT_DIR$/SimpleBank/utils" />
       <recent name="$PROJECT_DIR$/bonus" />
       <recent name="$PROJECT_DIR$/bonus/utils" />
       <recent name="$PROJECT_DIR$/SimpleBank/exceptions" />
-      <recent name="$PROJECT_DIR$/SimpleBank/exceptionHandler" />
     </key>
   </component>
   <component name="RunManager" selected="Django server.SimpleBank">
@@ -157,7 +197,7 @@
       <option name="presentableId" value="Default" />
       <updated>1632649873200</updated>
       <workItem from="1632649887067" duration="39916000" />
-      <workItem from="1632743656832" duration="72147000" />
+      <workItem from="1632743656832" duration="77336000" />
     </task>
     <task id="LOCAL-00001" summary="DM completed, celery added.">
       <created>1632860235541</created>
@@ -187,7 +227,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632903950637</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="user_statistic and filters added.">
+      <created>1632912259943</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1632912259943</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,7 +259,8 @@
     <MESSAGE value="only rename a function" />
     <MESSAGE value="close account api added." />
     <MESSAGE value="loan and installment added, cron added both to app and docker" />
-    <option name="LAST_COMMIT_MESSAGE" value="loan and installment added, cron added both to app and docker" />
+    <MESSAGE value="user_statistic and filters added." />
+    <option name="LAST_COMMIT_MESSAGE" value="user_statistic and filters added." />
   </component>
   <component name="WindowStateProjectService">
     <state x="412" y="202" width="613" height="390" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1632871947751">
@@ -223,18 +271,18 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="390" y="114" width="642" height="564" key="#docker-compose.yml.bonus:_Compose_Deployment/67.27.1299.741@67.27.1299.741" timestamp="1632681698629" />
-    <state x="279" y="27" width="865" height="741" key="CommitChangelistDialog2" timestamp="1632903950302">
+    <state x="279" y="27" width="865" height="741" key="CommitChangelistDialog2" timestamp="1632912259829">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="279" y="27" width="865" height="741" key="CommitChangelistDialog2/67.27.1299.741@67.27.1299.741" timestamp="1632903950302" />
+    <state x="279" y="27" width="865" height="741" key="CommitChangelistDialog2/67.27.1299.741@67.27.1299.741" timestamp="1632912259829" />
     <state width="1297" height="542" key="DebuggerActiveHint" timestamp="1632689159667">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state width="1297" height="542" key="DebuggerActiveHint/67.27.1299.741@67.27.1299.741" timestamp="1632689159667" />
-    <state x="167" y="125" width="1089" height="543" maximized="true" key="DiffContextDialog" timestamp="1632912244559">
+    <state x="167" y="125" width="1079" height="543" maximized="true" key="DiffContextDialog" timestamp="1632916263659">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="167" y="125" width="1089" height="543" maximized="true" key="DiffContextDialog/67.27.1299.741@67.27.1299.741" timestamp="1632912244559" />
+    <state x="167" y="125" width="1079" height="543" maximized="true" key="DiffContextDialog/67.27.1299.741@67.27.1299.741" timestamp="1632916263659" />
     <state width="1253" height="206" key="GridCell.Tab.0.bottom" timestamp="1632912221026">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
@@ -271,10 +319,10 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="205" y="31" key="SettingsEditor/67.27.1299.741@67.27.1299.741" timestamp="1632743483012" />
-    <state x="311" y="121" width="800" height="551" key="Vcs.Push.Dialog.v2" timestamp="1632903961171">
+    <state x="311" y="121" width="800" height="551" key="Vcs.Push.Dialog.v2" timestamp="1632912261768">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="311" y="121" width="800" height="551" key="Vcs.Push.Dialog.v2/67.27.1299.741@67.27.1299.741" timestamp="1632903961171" />
+    <state x="311" y="121" width="800" height="551" key="Vcs.Push.Dialog.v2/67.27.1299.741@67.27.1299.741" timestamp="1632912261768" />
     <state width="649" height="371" key="XDebugger.FullValuePopup" timestamp="1632865157084">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
@@ -291,17 +339,24 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="251" y="84" width="920" height="624" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/67.27.1299.741@67.27.1299.741" timestamp="1632841913003" />
-    <state x="364" y="107" width="785" height="578" key="find.popup" timestamp="1632910129427">
+    <state x="364" y="107" width="916" height="578" key="find.popup" timestamp="1632916559288">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="364" y="107" width="785" height="578" key="find.popup/67.27.1299.741@67.27.1299.741" timestamp="1632910129427" />
-    <state x="379" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1632911315685">
+    <state x="364" y="107" width="916" height="578" key="find.popup/67.27.1299.741@67.27.1299.741" timestamp="1632916559288" />
+    <state x="379" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1632917196017">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="379" y="89" width="672" height="678" key="search.everywhere.popup/67.27.1299.741@67.27.1299.741" timestamp="1632911315685" />
+    <state x="379" y="89" width="672" height="678" key="search.everywhere.popup/67.27.1299.741@67.27.1299.741" timestamp="1632917196017" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/identity/views.py</url>
+          <line>44</line>
+          <option name="timeStamp" value="138" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">

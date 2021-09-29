@@ -1,5 +1,5 @@
-from bonus.enums import TransactionType
-from bonus.celeryTasks import send_SMS
+from service.enums import TransactionType
+from SimpleBank.utils.celeryTasks import send_SMS
 
 
 def manage_sms(user, model, type):

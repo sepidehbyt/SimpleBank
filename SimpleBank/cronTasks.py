@@ -2,7 +2,7 @@ from django_cron import CronJobBase, Schedule
 from bonus.models import Account, Installment, Loan, UserStatistic
 from django.conf import settings
 from django.utils import timezone
-from bonus.utils.smsService import manage_sms
+from .utils.smsService import manage_sms
 
 
 class CalculateDailyInterest(CronJobBase):

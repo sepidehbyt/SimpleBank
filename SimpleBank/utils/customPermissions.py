@@ -1,5 +1,5 @@
 from rest_framework import permissions
-from bonus.enums import RoleType
+from identity.enums import RoleType
 
 
 class IsRegularUser(permissions.BasePermission):

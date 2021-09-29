@@ -24,7 +24,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "someVeryComplexSecretKey")
 DEBUG = int(os.environ.get("DEBUG", default=1))
 ALLOWED_HOSTS = str(os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost 127.0.0.1 [::1]")).split(" ")
 
-AUTH_USER_MODEL = 'bonus.User'
+AUTH_USER_MODEL = 'identity.User'
 
 # Application definition
 
@@ -35,7 +35,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bonus.apps.BonusConfig',
+    # 'bonus.apps.BonusConfig',
+    'identity.apps.IdentityConfig',
+    'manage.apps.ManageConfig',
+    'service.apps.ServiceConfig',
     'django_celery_results',
     'drf_yasg',
     'django_cron',
@@ -112,10 +115,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'bonus.utils.backends.JWTAuthentication',
+        'SimpleBank.utils.backends.JWTAuthentication',
     ),
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
-    'EXCEPTION_HANDLER': 'bonus.utils.exceptionHandler.custom_exception_handler',
+    'EXCEPTION_HANDLER': 'SimpleBank.utils.exceptionHandler.custom_exception_handler',
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 
