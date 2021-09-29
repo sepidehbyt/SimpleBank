@@ -20,3 +20,8 @@ class MinBalanceLimit(APIException):
 class BranchCloseMismatch(APIException):
     status_code = 400
     default_detail = 'User cannot close his account in this branch.'
+
+
+class UnSettledLoan(APIException):
+    status_code = 403
+    default_detail = 'You have unsettled loans.'

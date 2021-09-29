@@ -38,6 +38,13 @@ INSTALLED_APPS = [
     'bonus.apps.BonusConfig',
     'django_celery_results',
     'drf_yasg',
+    'django_cron',
+]
+
+CRON_CLASSES = [
+    "SimpleBank.cronTasks.CalculateDailyInterest",
+    "SimpleBank.cronTasks.CalculateInstallations",
+    "SimpleBank.cronTasks.CalculateLoans",
 ]
 
 MIDDLEWARE = [
@@ -80,7 +87,7 @@ DATABASES = {
         "NAME": os.environ.get("SQL_DATABASE", "db"),
         "USER": os.environ.get("SQL_USER", "root"),
         "PASSWORD": os.environ.get("SQL_PASSWORD", "1qaz!QAZ"),
-        "HOST": os.environ.get("SQL_HOST", "172.18.0.3"),
+        "HOST": os.environ.get("SQL_HOST", "172.18.0.2"),
         "PORT": os.environ.get("SQL_PORT", "3306"),
     }
 }
@@ -138,7 +145,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Celery
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'django-cache'
-CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", 'amqp://user:password@172.18.0.2'),
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", 'amqp://user:password@172.18.0.3'),
 
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
@@ -150,3 +157,6 @@ MIN_ACCOUNT_BALANCE = 10000
 MIN_TRANSACTION_AMOUNT = 1000
 MAX_TRANSACTION_AMOUNT = 1000000
 MAX_TRANSACTION_AMOUNT_DAILY = 3000000
+MIN_LOAN_AMOUNT = 1000000
+MAX_LOAN_AMOUNT = 10000000
+YEARLY_INTEREST_PERCENT = 10

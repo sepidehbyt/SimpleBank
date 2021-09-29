@@ -2,6 +2,7 @@ import jwt
 
 from datetime import datetime, timedelta
 
+from django.utils import timezone
 from django.conf import settings
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin
@@ -121,8 +122,8 @@ class Loan(models.Model):
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
     amount = models.IntegerField(default=0, blank=False)
     is_settled = models.BooleanField(default=False)
-    remainder_installment = models.IntegerField(default=12, blank=False)
-    type = models.CharField(max_length=12, choices=[(r, r.value) for r in RepaymentType])
+    remainder_installment = models.IntegerField(default=0, blank=False)
+    type = models.CharField(max_length=2, choices=[(r, r.value) for r in RepaymentType])
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
@@ -132,9 +133,10 @@ class Loan(models.Model):
 
 class Installment(models.Model):
     debtor = models.ForeignKey(User, on_delete=models.PROTECT)
-    loan = models.ForeignKey(Loan, on_delete=models.CASCADE)
+    loan = models.ForeignKey(Loan, on_delete=models.CASCADE, related_name="Installments_list")
     amount = models.IntegerField(default=0)
     is_settled = models.BooleanField(default=False)
+    pay_date = models.DateTimeField(default=timezone.now, blank=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self):

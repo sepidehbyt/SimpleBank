@@ -21,5 +21,9 @@ COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
 # copy project
 COPY . /usr/src/app/
 
+# copy cronjobs
+COPY ./django.cron /etc/cron.d/
+RUN crontab /etc/cron.d/django.cron
+
 # run entrypoint.sh
 ENTRYPOINT ["/usr/src/app/entrypoint.sh"]

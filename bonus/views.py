@@ -6,10 +6,10 @@ from django.shortcuts import get_object_or_404
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text
 from rest_framework.generics import RetrieveUpdateAPIView, ListCreateAPIView, CreateAPIView, UpdateAPIView
-from .models import User, Branch, Bank, Account, Transaction, Loan
+from .models import User, Branch, Bank, Account, Transaction, Loan, Installment
 from .serializers import LoginSerializer, RegistrationSerializer, UserSerializer, BranchCreateSerializer,\
     BranchSerializer, AccountSerializer, AccountMinimalSerializer, AccountCreateSerializer, TransactionCreateSerializer,\
-    TransactionSerializer, AccountCloseSerializer
+    TransactionSerializer, AccountCloseSerializer, LoanSerializer, LoanCreateSerializer
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
@@ -133,6 +133,9 @@ class AccountCloseApiView(APIView):
     def delete(self, request):
         queryset = Account.objects.filter(owner=request.user, is_active=True)
         account = get_object_or_404(queryset)
+        loans = Loan.objects.filter(applicant=request.user, is_settled=False)
+        if len(loans) > 0:
+            raise exceptions.UnSettledLoan()
         serializer = self.serializer_class(account, data=request.data, partial=True)
         src_branch_id = request.data.get('src_branch_id')
         if src_branch_id == account.src_branch_id:
@@ -243,6 +246,36 @@ class TransactionViewSet(viewsets.ViewSet):
             transaction = Transaction.objects.get(pk=serializer.data.get('id'))
             manage_sms(request.user, transaction, 'transaction')
             return Response(self.response_serializer_class(transaction).data,
+                            status=status.HTTP_201_CREATED)
+        else:
+            response = {'detail': serializer.errors}
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+
+class LoanViewSet(viewsets.ViewSet):
+    permission_classes = (IsRegularUser,)
+    serializer_class = LoanCreateSerializer
+    response_serializer_class = LoanSerializer
+    renderer_classes = [BonusResponseRenderer, ]
+
+    def list(self, request):
+        queryset = Loan.objects.filter(applicant=request.user)
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def retrieve(self, request, pk=None):
+        queryset = Loan.objects.filter(applicant=request.user)
+        loan = get_object_or_404(queryset, pk=pk)
+        serializer = self.response_serializer_class(loan)
+        return Response(serializer.data)
+
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data, context={'applicant': request.user})
+        if serializer.is_valid():
+            serializer.save()
+            loan = Loan.objects.get(pk=serializer.data.get('id'))
+            manage_sms(request.user, loan, 'loan')
+            return Response(self.response_serializer_class(loan).data,
                             status=status.HTTP_201_CREATED)
         else:
             response = {'detail': serializer.errors}

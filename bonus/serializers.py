@@ -2,16 +2,17 @@ from abc import ABC
 
 from rest_framework import serializers
 from django.core.exceptions import PermissionDenied
-from .models import User, Branch, Account, Bank, Transaction
+from .models import User, Branch, Account, Bank, Transaction, Loan, Installment
 from django.contrib.auth import authenticate
 from bonus.utils import exceptions
 from django.conf import settings
-from .enums import RoleType, TransactionType
+from .enums import RoleType, TransactionType, RepaymentType
 from rest_framework.serializers import PrimaryKeyRelatedField
 import random
 import string
 from django.db.models import Q, Sum
 import datetime
+from dateutil.relativedelta import relativedelta
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -222,7 +223,7 @@ class TransactionCreateSerializer(serializers.ModelSerializer):
         src_account = data.get('src_account_id')
         if dest_account.owner != owner:
             raise serializers.ValidationError('This account does not belong to user.')
-        total_transaction_amount = Transaction.objects.filter(created_at__gt=datetime.date.today(), owner=owner)\
+        total_transaction_amount = Transaction.objects.filter(created_at__gt=datetime.date.today(), owner=owner) \
             .aggregate(Sum('amount'))
         if total_transaction_amount['amount__sum'] is None:
             total_transaction_amount = 0
@@ -263,3 +264,55 @@ class TransactionCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return Transaction.objects.create(**validated_data)
+
+
+class InstallmentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Installment
+        fields = ['id', 'amount', 'pay_date', 'is_settled']
+
+
+class LoanSerializer(serializers.ModelSerializer):
+    branch = BranchMinimalSerializer()
+    installments = InstallmentSerializer(source='Installments_list', many=True)
+
+    class Meta:
+        model = Loan
+        fields = ['id', 'branch', 'amount', 'type', 'is_settled', 'remainder_installment', 'installments']
+
+
+class LoanCreateSerializer(serializers.ModelSerializer):
+    branch_id = PrimaryKeyRelatedField(queryset=Branch.objects.all(), required=True)
+    amount = serializers.IntegerField(min_value=int(settings.MIN_LOAN_AMOUNT),
+                                      max_value=int(settings.MAX_LOAN_AMOUNT))
+    type = serializers.CharField(max_length=2)
+
+    class Meta:
+        model = Loan
+        fields = ['id', 'branch_id', 'amount', 'type']
+
+    def validate(self, data):
+        return {'applicant': self.context.get('applicant'),
+                'branch': data.get('branch_id'),
+                'amount': data.get('amount'),
+                'remainder_installment': data.get('amount'),
+                'type': data.get('type')}
+
+    def create_installments(self, loan):
+        repayment_type = int(loan.type)
+        amount = round(loan.amount / repayment_type)
+        pay_date = datetime.date.today()
+        one_month = relativedelta(months=1)
+        for i in range(repayment_type):
+            pay_date = pay_date + one_month
+            installment = Installment(debtor=loan.applicant,
+                                      loan=loan,
+                                      amount=amount,
+                                      pay_date=pay_date)
+            installment.save()
+
+    def create(self, validated_data):
+        loan = Loan.objects.create(**validated_data)
+        self.create_installments(loan)
+        return loan

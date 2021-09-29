@@ -24,5 +24,8 @@ def manage_sms(user, model, type):
                        (model.src_account.owner.first_name, model.src_account.owner.last_name,
                         model.amount, model.src_account.number),
                        ]
+    elif type == 'loan':
+        message = 'Dear %s %s, You got a bank loan amount: %d Toman with a %d-month repayment term.' % \
+                  (user.first_name, user.last_name, model.amount, int(model.type))
 
     send_SMS.delay(message)
