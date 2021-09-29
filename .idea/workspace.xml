@@ -2,56 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7994e11-2ed6-41bf-ab1a-5d6a87eb60a4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/identity/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity/enums.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/identity/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/enums.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimpleBank/cronTasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/cronTasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimpleBank/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimpleBank/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/celeryTasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/utils/celeryTasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/enums.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/serializers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/utils/backends.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/utils/backends.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/utils/bonusRenderer.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/utils/bonusRenderer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/utils/customPermissions.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/utils/customPermissions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/utils/exceptionHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/utils/exceptionHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/utils/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/utils/exceptions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/utils/smsService.py" beforeDir="false" afterPath="$PROJECT_DIR$/SimpleBank/utils/smsService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bonus/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/initial_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/initial_data.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +148,7 @@
       <option name="presentableId" value="Default" />
       <updated>1632649873200</updated>
       <workItem from="1632649887067" duration="39916000" />
-      <workItem from="1632743656832" duration="77336000" />
+      <workItem from="1632743656832" duration="77729000" />
     </task>
     <task id="LOCAL-00001" summary="DM completed, celery added.">
       <created>1632860235541</created>
@@ -234,7 +185,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632912259943</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="some code refactor">
+      <created>1632917436955</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1632917436955</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,7 +218,8 @@
     <MESSAGE value="close account api added." />
     <MESSAGE value="loan and installment added, cron added both to app and docker" />
     <MESSAGE value="user_statistic and filters added." />
-    <option name="LAST_COMMIT_MESSAGE" value="user_statistic and filters added." />
+    <MESSAGE value="some code refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="some code refactor" />
   </component>
   <component name="WindowStateProjectService">
     <state x="412" y="202" width="613" height="390" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1632871947751">
@@ -271,18 +230,18 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="390" y="114" width="642" height="564" key="#docker-compose.yml.bonus:_Compose_Deployment/67.27.1299.741@67.27.1299.741" timestamp="1632681698629" />
-    <state x="279" y="27" width="865" height="741" key="CommitChangelistDialog2" timestamp="1632912259829">
+    <state x="279" y="27" width="865" height="741" key="CommitChangelistDialog2" timestamp="1632917436618">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="279" y="27" width="865" height="741" key="CommitChangelistDialog2/67.27.1299.741@67.27.1299.741" timestamp="1632912259829" />
+    <state x="279" y="27" width="865" height="741" key="CommitChangelistDialog2/67.27.1299.741@67.27.1299.741" timestamp="1632917436618" />
     <state width="1297" height="542" key="DebuggerActiveHint" timestamp="1632689159667">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state width="1297" height="542" key="DebuggerActiveHint/67.27.1299.741@67.27.1299.741" timestamp="1632689159667" />
-    <state x="167" y="125" width="1079" height="543" maximized="true" key="DiffContextDialog" timestamp="1632916263659">
+    <state x="167" y="125" width="1079" height="543" maximized="true" key="DiffContextDialog" timestamp="1632917818425">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="167" y="125" width="1079" height="543" maximized="true" key="DiffContextDialog/67.27.1299.741@67.27.1299.741" timestamp="1632916263659" />
+    <state x="167" y="125" width="1079" height="543" maximized="true" key="DiffContextDialog/67.27.1299.741@67.27.1299.741" timestamp="1632917818425" />
     <state width="1253" height="206" key="GridCell.Tab.0.bottom" timestamp="1632912221026">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
@@ -319,10 +278,10 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="205" y="31" key="SettingsEditor/67.27.1299.741@67.27.1299.741" timestamp="1632743483012" />
-    <state x="311" y="121" width="800" height="551" key="Vcs.Push.Dialog.v2" timestamp="1632912261768">
+    <state x="311" y="121" width="800" height="551" key="Vcs.Push.Dialog.v2" timestamp="1632917439164">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="311" y="121" width="800" height="551" key="Vcs.Push.Dialog.v2/67.27.1299.741@67.27.1299.741" timestamp="1632912261768" />
+    <state x="311" y="121" width="800" height="551" key="Vcs.Push.Dialog.v2/67.27.1299.741@67.27.1299.741" timestamp="1632917439164" />
     <state width="649" height="371" key="XDebugger.FullValuePopup" timestamp="1632865157084">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
