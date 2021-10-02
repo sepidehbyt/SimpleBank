@@ -147,10 +147,15 @@ class LoanViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def create(self, request):
+        queryset = Account.objects.filter(owner=request.user)
+        account = get_object_or_404(queryset)
         serializer = self.serializer_class(data=request.data, context={'applicant': request.user})
+
         if serializer.is_valid():
             serializer.save()
             loan = Loan.objects.get(pk=serializer.data.get('id'))
+            account.credit = account.credit + serializer.data.get('amount')
+            account.save()
             manage_sms(request.user, loan, 'loan')
             return Response(self.response_serializer_class(loan).data,
                             status=status.HTTP_201_CREATED)

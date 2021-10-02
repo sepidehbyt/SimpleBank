@@ -126,7 +126,7 @@ class TransactionCreateSerializer(serializers.ModelSerializer):
                 dest_account.credit = dest_account.credit + amount
                 dest_account.save()
                 transaction_type = TransactionType.DEPOSIT_CASH.value
-                update_user_statistic(dest_account, +amount)
+                self.update_user_statistic(dest_account, +amount)
             # account to account deposit
             else:
                 self.check_amount(src_account, amount)
@@ -135,14 +135,14 @@ class TransactionCreateSerializer(serializers.ModelSerializer):
                 src_account.credit = src_account.credit - amount
                 src_account.save()
                 transaction_type = TransactionType.DEPOSIT.value
-                update_user_statistic(src_account, +amount)
-                update_user_statistic(dest_account, -amount)
+                self.update_user_statistic(src_account, +amount)
+                self.update_user_statistic(dest_account, -amount)
         else:
             # withdraw cash from his own account
             dest_account.credit = dest_account.credit + amount
             dest_account.save()
             transaction_type = TransactionType.WITHDRAW.value
-            update_user_statistic(dest_account, -amount)
+            self.update_user_statistic(dest_account, -amount)
 
         return {'src_account': data.get('src_account_id'),
                 'dest_account': data.get('dest_account_id'),

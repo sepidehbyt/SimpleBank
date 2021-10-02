@@ -1,5 +1,6 @@
 from django_cron import CronJobBase, Schedule
-from bonus.models import Account, Installment, Loan, UserStatistic
+from service.models import Account, Installment, Loan
+from identity.models import UserStatistic
 from django.conf import settings
 from django.utils import timezone
 from .utils.smsService import manage_sms
